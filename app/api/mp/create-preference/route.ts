@@ -8,7 +8,8 @@ export async function POST(req: Request) {
     }
 
     const { name } = await req.json().catch(() => ({ name: undefined }));
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3001';
+    const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || vercelUrl || 'http://localhost:3001';
 
     const body: any = {
       items: [
